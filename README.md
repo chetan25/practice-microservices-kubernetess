@@ -45,7 +45,27 @@
 - To restart kubectl deployment `kubectl rollout restart deployment <deploymentName>`
 
 - Types of Services:
+
   - Cluster IP - Sets up easy to remember URL to access a pod. `Only exposes pods in the cluster`.
   - Node Port - Makes pods `accessible from outside cluster`. Usually only used for dev purposes.
   - Load Balancer - Makes a pod `accessible from outside the cluster`. This is the right way to expose pod to the outside world.
   - External Name - Redirects an in cluster request to a CNAME url.
+
+- Load balancer service
+
+  - Tells kubernetes to reach out to its provider and provision a load balancer, Gets traffic in to a single pod.
+
+- Ingress or Ingress Controller
+
+  - A pod with a set of config of routing rules to distribute traffic to other services. (https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
+  - `kubectl get pods --namespace=ingress-nginx`
+
+- Ingress Controller will scan all the config file and look for one that has a annotations like
+
+```js
+  annotations:
+  kubernetes.io/ingress.class: nginx
+
+```
+
+- To find what is running on certain port, for example 80 in windows machine `netstat -aon | findstr :80` on mac `sudo lsof -i tcp:80`

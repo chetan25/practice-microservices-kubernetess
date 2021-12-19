@@ -15,3 +15,16 @@ spec:
       containers:
         - name: posts
           image: chetan2020/posts # assumes we are using latest version
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-cluster-srv
+spec:
+  selector:
+    app: posts
+  ports:
+    - name: posts-cluster-srv
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

@@ -27,7 +27,9 @@ app.post("/posts", async (req, res) => {
 
   // emit event
   try {
-    await axios.post("http://localhost:4005/events", {
+    // old http://localhost:4005/events
+    // with kubectl: event-bus-srv
+    await axios.post("http://event-bus-srv:4005/events", {
       type: "PostCreated",
       data: newPost,
     });

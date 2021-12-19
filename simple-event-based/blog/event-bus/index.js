@@ -15,10 +15,16 @@ app.post("/events", (req, res) => {
   const event = req.body;
   events.push(event);
   try {
-    axios.post("http://localhost:4000/events", event); //post
-    axios.post("http://localhost:4001/events", event); // comment
-    axios.post("http://localhost:4002/events", event); // query
-    axios.post("http://localhost:4003/events", event); // moderation
+    // axios.post("http://localhost:4000/events", event); //post
+    // axios.post("http://localhost:4001/events", event); // comment
+    // axios.post("http://localhost:4002/events", event); // query
+    // axios.post("http://localhost:4003/events", event); // moderation
+
+    // kubectl, "posts-cluster-srv" service name
+    axios.post("http://posts-cluster-srv:4000/events", event); //post
+    axios.post("http://comments-srv:4001/events", event); // comment
+    axios.post("http://query-srv:4002/events", event); // query
+    axios.post("http://moderation-srv:4003/events", event); // moderation
 
     res.send({ status: "OK" });
   } catch (e) {
