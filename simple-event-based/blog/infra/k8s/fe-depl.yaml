@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: query-depl
+  name: fe-app-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: query
+      app: fe-app
   template:
     metadata:
       labels:
-        app: query
+        app: fe-app
     spec:
       containers:
-        - name: query
-          image: chetan2020/query
+        - name: fe-app
+          image: chetan2020/fe
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: query-srv
+  name: fe-app-srv
 spec:
   selector:
-    app: query
-  type: ClusterIP
+    app: fe-app
+  type: ClusterIP # default is ClusterIP
   ports:
-    - name: query
+    - name: fe-app
       protocol: TCP
-      port: 4002
-      targetPort: 4002
+      port: 3000
+      targetPort: 3000

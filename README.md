@@ -69,3 +69,17 @@
 ```
 
 - To find what is running on certain port, for example 80 in windows machine `netstat -aon | findstr :80` on mac `sudo lsof -i tcp:80`
+
+- To trick you OS to redirect to a localhost when coming form a URL, add a entry to host file. In windows the hosts file is `C:\Windows\System32\Drivers\etc\hosts`
+
+```js
+// Only for Development
+// to trick our OS/browser to connect to local host when a request to posts.com is made
+127.0.0.1 posts.com
+```
+
+- Ingress controller cannot route based on method, it only routes based on path
+
+- Since we want to handle the routes in FE, we would need to set a path with regex so that it matches all routes `path: /?(.*)`. This has to be the last path in the paths array, since it will try to match from top down
+
+- Skaffold - automates many tasks in Kubernetes dev environment. Makes it easy to update code in running pod and create/delete objects tied to a project.

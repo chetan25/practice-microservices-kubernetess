@@ -15,7 +15,7 @@ app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/posts/create", async (req, res) => {
   const id = randomBytes(4).toString("hex");
   // will only have title in body
   const { title } = req.body;
@@ -29,7 +29,7 @@ app.post("/posts", async (req, res) => {
   try {
     // old http://localhost:4005/events
     // with kubectl: event-bus-srv
-    await axios.post("http://event-bus-srv:4005/events", {
+    await axios.post("http://event-bus-cluster-srv:4005/events", {
       type: "PostCreated",
       data: newPost,
     });

@@ -12,7 +12,7 @@ app.get("/events", async (req, res) => {
     const { content } = data;
     const isValid = content.includes("orange");
     try {
-      await axios.post("http://event-bus-srv:4005/events", {
+      await axios.post("http://event-bus-cluster-srv:4005/events", {
         type: "CommentModerated",
         ...data,
         status: isValid ? "approved" : "rejected",

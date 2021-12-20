@@ -33,7 +33,7 @@ app.post("/posts/:id/comments", async (req, res) => {
 
   // emit event
   try {
-    await axios.post("http://event-bus-srv:4005/events", {
+    await axios.post("http://event-bus-cluster-srv:4005/events", {
       type: "CommentCreated",
       data: {
         id: id,
@@ -44,6 +44,7 @@ app.post("/posts/:id/comments", async (req, res) => {
     });
     res.status(201).send(commentsByPostId[postId]);
   } catch (e) {
+    console.log(e);
     res.status(500).send("Error");
   }
 });
@@ -57,7 +58,7 @@ app.post("/events", async (req, res) => {
     const comment = comments.find((cmt) => cmt.id === id);
     comment.status = status;
     try {
-      await axios.post("http://event-bus-srv:4005/events", {
+      await axios.post("http://event-bus-cluster-srv:4005/events", {
         type: "CommentUpdated",
         data: {
           id: id,
